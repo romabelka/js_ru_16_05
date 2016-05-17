@@ -2,7 +2,8 @@ import React, { PropTypes, Component } from 'react'
 
 class Article extends Component {
     state = {
-        isOpen: false
+        isOpen: false,
+        some: 'other'
     }
 
     render() {
