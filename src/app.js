@@ -1,11 +1,28 @@
 import React from 'react'
 import { render } from 'react-dom'
-import Article from './components/Article'
+import ArticleList from './components/ArticleList'
 
-const article = {
-    id: 1,
-    title: 'lorem ipsum',
-    text: 'some big text'
-}
+const articles = [
+    {
+        id: 11,
+        title: 'lorem ipsum',
+        text: 'some big text'
+    },
+    {
+        id: 12,
+        title: 'Second title',
+        text: 'second some big text'
+    },
+    {
+        id: 13,
+        title: 'third lorem ipsum',
+        text: 'third some big text'
+    },
+    {
+        id: 14,
+        title: 'fourth lorem ipsum',
+        text: 'fourth some big text'
+    }
+]
 
-render(<Article article = {article}/>, document.getElementById('container'))
+render(<ArticleList articles = {articles}/>, document.getElementById('container'))
