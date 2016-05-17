@@ -1,4 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
+import Article from './components/Article'
 
-render(<h1>Hello world</h1>, document.getElementById('container'))
+const article = {
+    id: 1,
+    title: 'lorem ipsum',
+    text: 'some big text'
+}
+
+render(<Article article = {article}/>, document.getElementById('container'))
