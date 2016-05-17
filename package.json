@@ -1,0 +1,37 @@
+{
+  "name": "react_course_16_05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "api": "node simple_api/server.js",
+    "dev": "webpack-dev-server --hot --inline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romabelka/js_ru_16_05.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romabelka/js_ru_16_05.git"
+  },
+  "homepage": "https://github.com/romabelka/js_ru_16_05.git",
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+  }
+}
