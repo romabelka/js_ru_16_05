@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 import toggleOpen from '../decorators/toggleOpen'
 
@@ -14,6 +15,9 @@ class Article extends Component {
     }
 
     componentDidMount() {
+        console.log('---', this.refs.title)
+        console.log('---', findDOMNode(this.refs.list))
+//        debugger
     }
 
     componentWillUnmount() {
@@ -25,10 +29,10 @@ class Article extends Component {
         if (!article) return <h3>No article</h3>
 
         const { title, text, comments, id } = article
-        const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} /></div></section> : null
+        const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} ref="list" /></div></section> : null
         return (
             <div>
-                <h3 onClick = {toggleOpen}>{title}</h3>
+                <h3 onClick = {toggleOpen} ref="title">{title}</h3>
                 {textItem}
             </div>
         )
