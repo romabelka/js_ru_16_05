@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     state = {
@@ -10,9 +11,9 @@ class Article extends Component {
         const { article } = this.props
         if (!article) return <h3>No article</h3>
 
-        const { title, text, id } = article
+        const { title, text, comments, id } = article
         const { isOpen } = this.state
-        const textItem = isOpen ? <section>{text}</section> : null
+        const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} /></div></section> : null
         return (
             <div>
                 <h3 onClick = {this.handleClick}>{title}</h3>
@@ -33,7 +34,7 @@ Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string,
-        id: PropTypes.number.isRequired
+        id: PropTypes.string.isRequired
     })
 }
 
