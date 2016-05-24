@@ -55,4 +55,4 @@ Article.propTypes = {
     toggleOpen: PropTypes.func.isRequired
 }
 
-export default toggleOpen(Article)
+export default Article
