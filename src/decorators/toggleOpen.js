@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 export default (CustomComponent) => {
     return class DecoratedComponent extends Component {
         state = {
-            isOpen: true
+            isOpen: false
         }
 
         render() {

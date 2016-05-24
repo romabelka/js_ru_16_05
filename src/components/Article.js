@@ -16,12 +16,15 @@ class Article extends Component {
 
     componentDidMount() {
         console.log('---', this.refs.title)
-        console.log('---', findDOMNode(this.refs.list))
 //        debugger
     }
 
     componentWillUnmount() {
 
+    }
+
+    componentDidUpdate() {
+        console.log('---', findDOMNode(this.refs.list))
     }
 
     render() {
