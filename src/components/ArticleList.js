@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Article from './Article'
+import Article from './ArticleOld'
 
 function ArticleList(props) {
     const { articles } = props
