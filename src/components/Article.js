@@ -3,6 +3,23 @@ import CommentList from './CommentList'
 import toggleOpen from '../decorators/toggleOpen'
 
 class Article extends Component {
+    constructor() {
+        super()
+        this.state = {
+            some: ''
+        }
+    }
+
+    componentWillMount() {
+    }
+
+    componentDidMount() {
+    }
+
+    componentWillUnmount() {
+
+    }
+
     render() {
         const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>

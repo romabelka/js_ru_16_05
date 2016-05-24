@@ -1,8 +1,8 @@
 //also know as HOC higher order components
-import React, { Component as ReactComponent } from 'react'
+import React, { Component } from 'react'
 
 export default (CustomComponent) => {
-    return class DecoratedComponent extends ReactComponent {
+    return class DecoratedComponent extends Component {
         state = {
             isOpen: false
         }
