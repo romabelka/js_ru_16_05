@@ -15,7 +15,7 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        console.log('---', this.refs.title)
+        console.log('--- componentDidMount ---', this.refs.title)
 //        debugger
     }
 
@@ -24,15 +24,21 @@ class Article extends Component {
     }
 
     componentDidUpdate() {
-        console.log('---', findDOMNode(this.refs.list))
+        console.log('--- componentDidUpdate ---', findDOMNode(this.refs.list))
     }
 
     render() {
         const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>
 
-        const { title, text, comments, id } = article
-        const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} ref="list" /></div></section> : null
+        const { title, text, comments, id } = article;
+        const textItem = isOpen ?
+    		<section>{text}
+    			<div>
+    				<CommentList comments = {comments} ref="list" />
+    			</div>
+    		</section> : null;
+
         return (
             <div>
                 <h3 onClick = {toggleOpen} ref="title">{title}</h3>
