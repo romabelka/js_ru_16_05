@@ -44,6 +44,8 @@ export default class Article extends Component {
 		const { title, text } = this.props;
 		const { isOpen } = this.state;
 
+		if (!title) return <h1>No article</h1>
+
 		return (
 			<div className="item">
 				<h1>{title}</h1>
