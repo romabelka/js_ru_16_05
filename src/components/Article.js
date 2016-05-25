@@ -1,65 +1,61 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react'
+import { findDOMNode } from 'react-dom'
+import CommentList from './CommentList'
+import toggleOpen from '../decorators/toggleOpen'
 
-/*
-  component
-*/
+class Article extends Component {
+    constructor() {
+        super()
+        this.state = {
+            some: ''
+        }
+    }
 
-export default class Article extends Component {
-	static propTypes = {
-		title: PropTypes.string.isRequired,
-		text: PropTypes.string.isRequired,
-		comments: PropTypes.array
-	}
+    componentWillMount() {
+    }
 
-	state = {
-		isOpen: false
-	}
+    componentDidMount() {
+        console.log('---', this.refs.title)
+//        debugger
+    }
 
-	toggleComments = () => {
-		this.setState({
-			isOpen: !this.state.isOpen
-		});
-	}
+    componentWillUnmount() {
 
-	renderComments() {
-		const { comments } = this.props;
-		let templateComments;
+    }
 
-		if (comments) {
-			templateComments = comments.map(comment => {
-				return (
-					<li key={comment.id}>
-						<h2>{comment.name}</h2>
-						<p>{comment.text}</p>
-					</li>
-				)
+    componentDidUpdate() {
+        console.log('---', findDOMNode(this.refs.list))
+    }
 
-			})
-		}
+    render() {
+        const { article, isOpen, toggleOpen } = this.props
+        if (!article) return <h3>No article</h3>
 
-		return templateComments;
-	}
-
-	render() {
-		const { title, text } = this.props;
-		const { isOpen } = this.state;
-
-		if (!title) return <h1>No article</h1>
-
-		return (
-			<div className="item">
-				<h1>{title}</h1>
-				<p onClick={this.toggleComments}>{text}</p>
-				{ isOpen && (
-					<ul>
-						{ this.renderComments() }
-					</ul>
-				)}
-			</div>
-		);
-	}
-
+        const { title, text, comments, id } = article
+        const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} ref="list" /></div></section> : null
+        return (
+            <div>
+                <h3 onClick = {toggleOpen} ref="title">{title}</h3>
+                {textItem}
+            </div>
+        )
+    }
 }
+
+
+Article.propTypes = {
+    article: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string,
+        id: PropTypes.string.isRequired
+    }),
+
+    //From toggleOpen decorator
+    isOpen: PropTypes.bool.isRequired,
+    toggleOpen: PropTypes.func.isRequired
+}
+
+export default Article
 
 // хорошее документирование, если придется переиспользовать компонент - propTypes
 // 90% переменных в реакт - const

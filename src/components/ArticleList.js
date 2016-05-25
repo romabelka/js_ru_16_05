@@ -1,43 +1,41 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react'
+import Article from './Article'
+import Chart from './Chart'
 
-/**
- * dependencies
- */
+class ArticleList extends Component {
+    state = {
+        openedArticle: null
+    }
 
- import Article from './Article';
+    openArticle = id => ev => {
+        if (ev) ev.preventDefault()
+        this.setState({
+            openedArticle: this.state.openedArticle == id ? null : id
+        })
+    }
 
-/*
-  component
-*/
 
-export default class ArticleList extends Component {
-	static propTypes = {
-		data: PropTypes.array.isRequired
-	}
-
-	renderArticlesList() {
-		const { data } = this.props;
-
-		const templateList = data.map(article => {
-			return (
-				<li key={article.id}>
-					<Article
-						title={article.title}
-						text={article.text}
-						comments={article.comments} />
-				</li>
-			)
-		});
-
-		return templateList;
-	}
-
-	render() {
-		return (
-			<ul>
-				{ this.renderArticlesList() }
-			</ul>
-		);
-	}
-
+    render() {
+        const { articles } = this.props
+        const articleItems = articles.map((article) => <li key={article.id}>
+            <Article article = {article}
+                isOpen = {article.id == this.state.openedArticle}
+                toggleOpen = {this.openArticle(article.id)}
+            />
+        </li>)
+        return (
+            <div>
+                <ul>
+                    {articleItems}
+                </ul>
+                <Chart articles = {articles}/>
+            </div>
+        )
+    }
 }
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+}
+
+export default ArticleList
