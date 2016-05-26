@@ -7,13 +7,17 @@ import dataFlowArticle from '../decorators/dataFlowArticle';
 class ArticleList extends Component {
     render() {
         const { articles, openedArticle, openArticle } = this.props
-        console.log(openedArticle);
-        const articleItems = articles.map((article) => <li key={article.id}>
-            <Article article = {article}
-                isOpen = {article.id == openedArticle}
-                toggleOpen = {openArticle(article.id)}
-            />
-        </li>)
+        const articleItems = articles.map((article) => {
+            return (
+                <li key={article.id}>
+                    <Article
+                        article = {article}
+                        isOpen = {article.id == openedArticle}
+                        toggleOpen = {openArticle(article.id)} />
+                </li>
+            );
+        });
+
         return (
             <div>
                 <ul>
@@ -21,7 +25,7 @@ class ArticleList extends Component {
                 </ul>
                 <Chart articles = {articles}/>
             </div>
-        )
+        );
     }
 }
 

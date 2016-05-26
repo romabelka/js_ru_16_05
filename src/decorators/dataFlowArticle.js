@@ -15,8 +15,7 @@ export default (CustomComponent) => {
 
 	    render() {
 	    	return (
-	    		<CustomComponent
-	    			{...this.props}
+	    		<CustomComponent {...this.props}
 	    			openedArticle={this.state.openedArticle}
 	    			openArticle={this.openArticle} />
 	    	);
