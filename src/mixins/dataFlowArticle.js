@@ -1,12 +1,14 @@
 export default {
 	getInitialState() {
-		openedArticle: ''
-	}
+		return { openedArticle: '' }
+	},
 
-    openArticle = id => ev => {
+  openArticle(id) {
+  	return ev => {
         if (ev) ev.preventDefault()
         this.setState({
             openedArticle: this.state.openedArticle == id ? null : id
         })
     }
+  }
 }
