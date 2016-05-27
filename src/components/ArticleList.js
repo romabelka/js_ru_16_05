@@ -1,26 +1,15 @@
 import React, { PropTypes, Component } from 'react'
 import Article from './Article'
 import Chart from './Chart'
+import oneOpen from '../decorators/oneOpen'
 
 class ArticleList extends Component {
-    state = {
-        openedArticle: null
-    }
-
-    openArticle = id => ev => {
-        if (ev) ev.preventDefault()
-        this.setState({
-            openedArticle: this.state.openedArticle == id ? null : id
-        })
-    }
-
-
     render() {
-        const { articles } = this.props
+        const { articles, openItem, isOpen } = this.props
         const articleItems = articles.map((article) => <li key={article.id}>
             <Article article = {article}
-                isOpen = {article.id == this.state.openedArticle}
-                toggleOpen = {this.openArticle(article.id)}
+                isOpen = {isOpen(article.id)}
+                toggleOpen = {openItem(article.id)}
             />
         </li>)
         return (
@@ -38,4 +27,4 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default ArticleList
+export default oneOpen(ArticleList)

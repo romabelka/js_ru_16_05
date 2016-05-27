@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import ArticleList from './components/ArticleListOld'
+import ArticleList from './components/ArticleList'
 
 export const articles = [
     {
