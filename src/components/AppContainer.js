@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ArticleList from './ArticleList'
-import { articleStore } from '../stores'
+import { articleStore, commentStore } from '../stores'
 
 class AppContainer extends Component {
     constructor() {
@@ -11,11 +11,13 @@ class AppContainer extends Component {
     }
 
     componentDidMount() {
+        commentStore.addChangeListener(this.handleChange)
         articleStore.addChangeListener(this.handleChange)
     }
 
     componentWillUnmount() {
         articleStore.removeChangeListener(this.handleChange)
+        commentStore.removeChangeListener(this.handleChange)
     }
 
     handleChange = () => {
