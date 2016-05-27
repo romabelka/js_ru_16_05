@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 import toggleOpen from '../decorators/toggleOpen'
+import { deleteArticle } from '../AC/articles'
 
 class Article extends Component {
     constructor() {
@@ -43,7 +44,7 @@ class Article extends Component {
 
     handleDelete = (ev) => {
         ev.preventDefault()
-        console.log('---', 'deleting', this.props.article.id)
+        deleteArticle(this.props.article.id)
     }
 }
 

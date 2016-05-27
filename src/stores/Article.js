@@ -1,10 +1,23 @@
 import { EventEmitter } from 'events'
+import AppDispatcher from '../dispatcher'
 
 export default class Article extends EventEmitter {
     constructor(initialData = []) {
         super()
         this._items = {}
         initialData.forEach(this._add)
+
+        AppDispatcher.register((action) => {
+            const { type, payload } = action
+
+            switch (type) {
+                case 'DELETE_ARTICLE':
+                    this._delete(payload.id)
+                    this.emitChange()
+                    break;
+            }
+        })
+
     }
 
     getAll = () => Object.keys(this._items).map(this.getById)
