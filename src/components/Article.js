@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 import toggleOpen from '../decorators/toggleOpen'
 import { deleteArticle } from '../AC/articles'
+import { commentStore } from '../stores'
 
 class Article extends Component {
     constructor() {
@@ -30,7 +31,10 @@ class Article extends Component {
         if (!article) return <h3>No article</h3>
 
         const { title, text, comments, id } = article
-        const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} ref="list" /></div></section> : null
+        const textItem = isOpen ? <section>
+            {text}
+            <div><CommentList comments = {article.getRelation('comments')} ref="list" /></div>
+        </section> : null
         return (
             <div>
                 <h3 onClick = {toggleOpen} ref="title">
