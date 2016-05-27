@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import ArticleList from './components/ArticleList'
-import { articleStore } from './stores'
+import AppContainer from './components/AppContainer'
 
-render(<ArticleList articles = {articleStore.getAll()}/>, document.getElementById('container'))
+render(<AppContainer />, document.getElementById('container'))
