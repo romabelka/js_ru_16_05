@@ -15,8 +15,6 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        console.log('---', this.refs.title)
-//        debugger
     }
 
     componentWillUnmount() {
@@ -24,7 +22,6 @@ class Article extends Component {
     }
 
     componentDidUpdate() {
-        console.log('---', findDOMNode(this.refs.list))
     }
 
     render() {
@@ -35,10 +32,18 @@ class Article extends Component {
         const textItem = isOpen ? <section>{text}<div><CommentList comments = {comments} ref="list" /></div></section> : null
         return (
             <div>
-                <h3 onClick = {toggleOpen} ref="title">{title}</h3>
+                <h3 onClick = {toggleOpen} ref="title">
+                    {title}
+                    <a href="#" onClick={this.handleDelete}>delete me</a>
+                </h3>
                 {textItem}
             </div>
         )
+    }
+
+    handleDelete = (ev) => {
+        ev.preventDefault()
+        console.log('---', 'deleting', this.props.article.id)
     }
 }
 
