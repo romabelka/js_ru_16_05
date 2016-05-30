@@ -1,23 +1,17 @@
 import React, { PropTypes, Component } from 'react'
 import Article from './Article'
 import Chart from './Chart'
-
-import dataFlowArticle from '../decorators/dataFlowArticle';
+import oneOpen from '../decorators/oneOpen'
 
 class ArticleList extends Component {
     render() {
-        const { articles, openedArticle, openArticle } = this.props
-        const articleItems = articles.map((article) => {
-            return (
-                <li key={article.id}>
-                    <Article
-                        article = {article}
-                        isOpen = {article.id == openedArticle}
-                        toggleOpen = {openArticle(article.id)} />
-                </li>
-            );
-        });
-
+        const { articles, openItem, isOpen } = this.props
+        const articleItems = articles.map((article) => <li key={article.id}>
+            <Article article = {article}
+                isOpen = {isOpen(article.id)}
+                toggleOpen = {openItem(article.id)}
+            />
+        </li>)
         return (
             <div>
                 <ul>
@@ -31,10 +25,6 @@ class ArticleList extends Component {
 
 ArticleList.propTypes = {
     articles: PropTypes.array.isRequired,
-
-    // From dataFlow decorator
-    openedArticle: PropTypes.string.isRequired,
-    openArticle: PropTypes.func.isRequired
 }
 
-export default dataFlowArticle(ArticleList);
+export default oneOpen(ArticleList)

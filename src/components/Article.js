@@ -2,6 +2,8 @@ import React, { PropTypes, Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 import toggleOpen from '../decorators/toggleOpen'
+import { deleteArticle } from '../AC/articles'
+import { commentStore } from '../stores'
 
 class Article extends Component {
     constructor() {
@@ -15,8 +17,6 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        console.log('--- componentDidMount ---', this.refs.title)
-//        debugger
     }
 
     componentWillUnmount() {
@@ -24,27 +24,32 @@ class Article extends Component {
     }
 
     componentDidUpdate() {
-        console.log('--- componentDidUpdate ---', findDOMNode(this.refs.list))
     }
 
     render() {
         const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>
 
-        const { title, text, comments, id } = article;
-        const textItem = isOpen ?
-    		<section>{text}
-    			<div>
-    				<CommentList comments = {comments} ref="list" />
-    			</div>
-    		</section> : null;
+        const { title, text, comments, id } = article
+        const textItem = isOpen ? <section>
+            {text}
+            <div><CommentList comments = {article.getRelation('comments')} ref="list" /></div>
+        </section> : null
 
         return (
             <div>
-                <h3 onClick = {toggleOpen} ref="title">{title}</h3>
+                <h3 onClick = {toggleOpen} ref="title">
+                    {title}
+                    <a href="#" onClick={this.handleDelete}>delete me</a>
+                </h3>
                 {textItem}
             </div>
         )
+    }
+
+    handleDelete = (ev) => {
+        ev.preventDefault()
+        deleteArticle(this.props.article.id)
     }
 }
 

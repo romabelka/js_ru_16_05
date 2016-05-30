@@ -1,20 +1,19 @@
-import React, { PropTypes, Component } from 'react';
-import Article from './ArticleOld';
-import dataFlowArticle from '../mixins/dataFlowArticle';
+import React, { PropTypes, createClass } from 'react'
+import Article from './Article'
+import Chart from './Chart'
+import oneOpen from '../mixins/oneOpen'
 
-import Chart from './Chart';
-
-var ArticleList = React.createClass({
+const ArticleListOld = createClass({
     propTypes: {
-         articles: PropTypes.array.isRequired
+        articles: PropTypes.array.isRequired
     },
-    mixins: [dataFlowArticle],
-    render: function() {
-        var articles = this.props.articles;
-        var articleItems = articles.map((article) => <li key={article.id}>
+    mixins: [oneOpen],
+    render() {
+        const { articles } = this.props
+        const articleItems = articles.map((article) => <li key={article.id}>
             <Article article = {article}
-                isOpen = {article.id == this.state.openedArticle}
-                toggleOpen = {this.openArticle(article.id)}
+                isOpen = {this.isOpen(article.id)}
+                toggleOpen = {this.openItem(article.id)}
             />
         </li>)
         return (
@@ -26,7 +25,6 @@ var ArticleList = React.createClass({
             </div>
         )
     }
-
 })
 
-module.exports = ArticleList
+export default ArticleListOld
