@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
-import Comment from './Comment'
-import toggleOpen from '../decorators/toggleOpen'
+import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
+import Comment from './Comment';
+import toggleOpen from '../decorators/toggleOpen';
 
 class CommentList extends Component {
     static propTypes = {
@@ -12,8 +13,34 @@ class CommentList extends Component {
             <div>
                 {this.getToggler()}
                 {this.getList()}
+                {this.renderInputMessage()}
             </div>
         )
+    }
+
+    sendMessage = (ev) =>  {
+        let msg = {
+            name: findDOMNode(this.refs.name).value,
+            text: findDOMNode(this.refs.text).value
+        }
+
+        this.props.sendMessage(msg);
+        this.cleaneFields();
+    }
+
+    cleaneFields() {
+        findDOMNode(this.refs.name).value = '';
+        findDOMNode(this.refs.text).value = '';
+    }
+
+    renderInputMessage() {
+        return (
+            <div className="form-group">
+                <input type="text" defaultValue=''  placeholder='введите значение' ref="name" />
+                <textarea ref="text" defaultValue='' placeholder='введите значение' id="" cols="30" rows="10" />
+                <button onClick={this.sendMessage} ref='alert_button'>Send</button>
+            </div>
+        );
     }
 
     getToggler() {

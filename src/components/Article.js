@@ -26,6 +26,11 @@ class Article extends Component {
     componentDidUpdate() {
     }
 
+    sendMessage(msg) {
+        msg['id'] = this.comments.length + 1;
+        this.comments.push(msg);
+    }
+
     render() {
         const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>
@@ -33,7 +38,7 @@ class Article extends Component {
         const { title, text, comments, id } = article
         const textItem = isOpen ? <section>
             {text}
-            <div><CommentList comments = {article.getRelation('comments')} ref="list" /></div>
+            <div><CommentList comments = {article.getRelation('comments')} sendMessage={this.sendMessage} ref="list" /></div>
         </section> : null
 
         return (
