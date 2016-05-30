@@ -12,4 +12,6 @@ Object.assign(stores, {
 export const commentStore = stores.comments
 export const articleStore = stores.articles
 
+export { stores }
+
 window.stores = stores
