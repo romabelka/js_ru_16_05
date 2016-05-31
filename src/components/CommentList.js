@@ -20,6 +20,7 @@ class CommentList extends Component {
 
     sendMessage = (ev) =>  {
         let msg = {
+            //Манипуляции с DOM - антипаттерн, лучше держать в state значения + findDOMNode лишняя
             name: findDOMNode(this.refs.name).value,
             text: findDOMNode(this.refs.text).value
         }
