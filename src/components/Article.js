@@ -17,6 +17,9 @@ class Article extends Component {
     }
 
     componentDidMount() {
+        console.log(this);
+        const { article } = this.props;
+        console.log(article);
     }
 
     componentWillUnmount() {

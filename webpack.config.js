@@ -15,11 +15,12 @@ module.exports = {
     },
         resolve: {
         modulesDirectories: ['node_modules'],
-        extensions: ['', '.js', '.json', '.css']
+        extensions: ['', '.js', '.json', '.css', '.scss']
     },
     module: {
         loaders: [
-            {   test: /\.json$/,
+            {
+                test: /\.json$/,
                 loader: 'raw-loader'
             }, {
                 test: /\.jsx?/,
@@ -28,6 +29,9 @@ module.exports = {
             }, {
                 test: /\.css/,
                 loader: 'style-loader!css-loader'
+            },  {
+                test: /\.scss?$/,
+                loader: 'style!css!sass'
             }
         ]
     }
