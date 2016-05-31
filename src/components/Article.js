@@ -33,7 +33,7 @@ class Article extends Component {
         const { title, text, comments, id } = article
         const textItem = isOpen ? <section>
             {text}
-            <div><CommentList comments = {article.getRelation('comments')} ref="list" /></div>
+            <div><CommentList article = {article} ref="list" /></div>
         </section> : null
         return (
             <div>

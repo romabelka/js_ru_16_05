@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import NewCommentForm from './NewCommentForm'
 
 class CommentList extends Component {
     static propTypes = {
@@ -23,11 +24,15 @@ class CommentList extends Component {
     }
 
     getList() {
-        const { isOpen, comments } = this.props
+        const { isOpen, article } = this.props
+        const comments = article.getRelation('comments')
         if (!isOpen) return null
         if (!comments || !comments.length) return <h3>No comments yet</h3>
         const items = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
-        return <ul>{items}</ul>
+        return <ul>
+            {items}
+            <li><NewCommentForm articleId = {article.id} /></li>
+        </ul>
     }
 }
 
