@@ -9,6 +9,7 @@ Object.assign(stores, {
     comments: new BasicStore(stores, normalizedComments)
 })
 
+export default stores
 export const commentStore = stores.comments
 export const articleStore = stores.articles
 
