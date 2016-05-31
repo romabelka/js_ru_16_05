@@ -6,7 +6,7 @@ import { normalizedArticles, normalizedComments } from '../fixtures'
 const stores = {}
 
 Object.assign(stores, {
-    articles: new Article(stores, normalizedArticles),
+    articles: new Article(stores),
     comments: new Comment(stores, normalizedComments)
 })
 
