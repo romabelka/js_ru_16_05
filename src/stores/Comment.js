@@ -6,7 +6,7 @@ export default class Comment extends BasicStore {
     constructor(...args) {
         super(...args)
 
-        AppDispatcher.register((action) => {
+        this.dispatchToken = AppDispatcher.register((action) => {
             const { type, payload } = action
 
             switch (type) {

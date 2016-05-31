@@ -6,7 +6,7 @@ export default class Article extends BasicStore {
     constructor(...args) {
         super(...args)
 
-        AppDispatcher.register((action) => {
+        this.dispatchToken = AppDispatcher.register((action) => {
             const { type, payload } = action
 
             switch (type) {
@@ -16,6 +16,7 @@ export default class Article extends BasicStore {
                     break
 
                 case ADD_COMMENT:
+                    AppDispatcher.waitFor([this.getStores().comments.dispatchToken])
                     const article = this.getById(payload.articleId)
                     article.comments = (article.comments  || []).concat(payload.comment.id)
                     this.emitChange()
