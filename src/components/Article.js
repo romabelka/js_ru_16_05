@@ -28,6 +28,7 @@ class Article extends Component {
 
     sendMessage(msg) {
         msg['id'] = this.comments.length + 1;
+        //нет, для этого нужно использовать action creator и добавлять в стор реагируя на action - пересмотрите видео урока
         this.comments.push(msg);
     }
 
