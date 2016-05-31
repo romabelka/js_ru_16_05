@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import CommentList from './CommentList'
 import toggleOpen from '../decorators/toggleOpen'
-import { deleteArticle } from '../AC/articles'
+import { deleteArticle, loadArticleById } from '../AC/articles'
 import { commentStore } from '../stores'
 
 class Article extends Component {
@@ -21,6 +21,11 @@ class Article extends Component {
 
     componentWillUnmount() {
 
+    }
+
+    componentWillReceiveProps(newProps) {
+        const {isOpen, article: { id, text }} = newProps
+        if (isOpen && !text) loadArticleById({ id })
     }
 
     componentDidUpdate() {
