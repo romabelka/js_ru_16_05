@@ -57,7 +57,7 @@ Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string,
-        id: PropTypes.string.isRequired
+        id: PropTypes.number.isRequired
     }),
 
     //From toggleOpen decorator
