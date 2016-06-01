@@ -17,9 +17,6 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        console.log(this);
-        const { article } = this.props;
-        console.log(article);
     }
 
     componentWillUnmount() {
@@ -29,11 +26,6 @@ class Article extends Component {
     componentDidUpdate() {
     }
 
-    sendMessage(msg) {
-        msg['id'] = this.comments.length + 1;
-        this.comments.push(msg);
-    }
-
     render() {
         const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>
@@ -41,7 +33,7 @@ class Article extends Component {
         const { title, text, comments, id } = article
         const textItem = isOpen ? <section>
             {text}
-            <div><CommentList comments = {article.getRelation('comments')} sendMessage={this.sendMessage} ref="list" /></div>
+            <div><CommentList article={article} ref="list" /></div>
         </section> : null
 
         return (
@@ -81,3 +73,9 @@ export default Article
 // лайф макросы
 
 // реакт просто перестраивает дерево, не проверяет данные внутри - change state
+
+// sendMessage(msg) {
+//     msg['id'] = this.comments.length + 1;
+//     //нет, для этого нужно использовать action creator и добавлять в стор реагируя на action - пересмотрите видео урока
+//     this.comments.push(msg);
+// }

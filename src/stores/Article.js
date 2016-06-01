@@ -1,6 +1,6 @@
 import BasicStore from './BasicStore'
 import AppDispatcher from '../dispatcher'
-import { DELETE_ARTICLE } from '../constants'
+import { DELETE_ARTICLE, ADD_COMMENT } from '../constants'
 
 export default class Article extends BasicStore {
     constructor(...args) {
@@ -12,6 +12,11 @@ export default class Article extends BasicStore {
             switch (type) {
                 case DELETE_ARTICLE:
                     this._delete(payload.id)
+                    this.emitChange()
+                    break;
+                case ADD_COMMENT:
+                    const article = this.getById(payload.articleId)
+                    article.comments = (article.comments  || []).concat(payload.comment.id)
                     this.emitChange()
                     break;
             }

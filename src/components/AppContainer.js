@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import ArticleList from './ArticleList'
-import connectStore from '../decorators/connectStore'
+import connectToStore from '../decorators/connectToStore'
 
 class AppContainer extends Component {
-
     render() {
-        const { stores: { articles, comments } } = this.props;
-        return <ArticleList articles = {articles.getAll()} />
+        return <ArticleList articles = {this.props.articles} />
     }
 }
 
-export default connectStore(AppContainer);
+function getState(stores) {
+	return {
+		articles: stores.articles.getAll()
+	}
+}
+
+export default connectToStore(['articles', 'comments'], getState)(AppContainer);
