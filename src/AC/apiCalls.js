@@ -7,3 +7,7 @@ export function loadAllArticlesCall() {
 export function loadArticleCall({ id }) {
     return $.get(`api/article/${id}`)
 }
+
+export function loadArticleCommentsCall({ id }) {
+    return $.get(`api/comment?article=${id}`)
+}

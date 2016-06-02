@@ -1,5 +1,7 @@
-import { ADD_COMMENT } from '../constants'
+import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS } from '../constants'
 import AppDispatcher from '../dispatcher'
+import { asyncAC } from './utils'
+import { loadArticleCommentsCall } from './apiCalls'
 
 export function addComment(articleId, comment) {
     const id = Math.random() * 100
@@ -11,3 +13,6 @@ export function addComment(articleId, comment) {
         }
     })
 }
+
+export const loadArticleComments = asyncAC(LOAD_ARTICLE_COMMENTS, loadArticleCommentsCall)
+//loadArticleComments(id)

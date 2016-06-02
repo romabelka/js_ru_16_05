@@ -3,7 +3,7 @@ import { addComment } from '../AC/comments'
 
 class NewCommentForm extends Component {
     static propTypes = {
-        articleId: PropTypes.string.isRequired
+        articleId: PropTypes.number.isRequired
     };
 
     state = {

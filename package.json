@@ -32,6 +32,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.1",
     "events": "^1.1.0",
     "flux": "^2.1.1",
     "jquery": "^2.2.4",
