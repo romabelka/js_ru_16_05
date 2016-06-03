@@ -1,6 +1,7 @@
 import BasicStore from './BasicStore'
 import AppDispatcher from '../dispatcher'
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE_BY_ID, START, SUCCESS, FAIL } from '../constants'
+import { DELETE_ARTICLE, LOAD_COMMENTS_FOR_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE_BY_ID,
+    START, SUCCESS, FAIL } from '../constants'
 
 export default class Article extends BasicStore {
     constructor(...args) {
@@ -41,6 +42,20 @@ export default class Article extends BasicStore {
                     break
 
                 case LOAD_ARTICLE_BY_ID + FAIL:
+                    break
+
+                case LOAD_COMMENTS_FOR_ARTICLE + START:
+                    Object.assign(this.getById(payload.id), {
+                        loadingComments: true
+                    })
+                    break
+
+                case LOAD_COMMENTS_FOR_ARTICLE + SUCCESS:
+                    AppDispatcher.waitFor([this.getStores().comments.dispatchToken])
+                    Object.assign(this.getById(payload.id), {
+                        loadingComments: false,
+                        loadedComments: true
+                    })
                     break
 
                 default:

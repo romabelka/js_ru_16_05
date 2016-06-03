@@ -7,7 +7,7 @@ const stores = {}
 
 Object.assign(stores, {
     articles: new Article(stores),
-    comments: new Comment(stores, normalizedComments)
+    comments: new Comment(stores)
 })
 
 export default stores
