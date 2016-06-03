@@ -3,6 +3,8 @@ import CommentList from './CommentList'
 
 function Body(props) {
     const { article } = props
+    if (!article) return null
+
     const { text, loading } = article
     if (loading) return <h3>Loading...</h3>
 
@@ -15,7 +17,7 @@ function Body(props) {
 }
 
 Body.propTypes = {
-    article: PropTypes.object.isRequired
+    article: PropTypes.object
 }
 
 export default Body

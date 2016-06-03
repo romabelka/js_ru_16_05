@@ -9,7 +9,7 @@ export default class Article extends BasicStore {
 
         this.dispatchToken = AppDispatcher.register((action) => {
             const { type, payload, response, error } = action
-
+            let article
             switch (type) {
                 case DELETE_ARTICLE:
                     this._delete(payload.id)
@@ -17,7 +17,7 @@ export default class Article extends BasicStore {
 
                 case ADD_COMMENT:
                     AppDispatcher.waitFor([this.getStores().comments.dispatchToken])
-                    const article = this.getById(payload.articleId)
+                    article = this.getById(payload.articleId)
                     article.comments = (article.comments  || []).concat(payload.comment.id)
                     break
 
@@ -34,7 +34,9 @@ export default class Article extends BasicStore {
                     break
 
                 case LOAD_ARTICLE_BY_ID + START:
-                    this.getById(payload.id).loading = true
+                    article = this.getById(payload.id)
+                    if (!article) this._add({ id: payload.id, loading: true })
+                    else article.loading = true
                     break;
 
                 case LOAD_ARTICLE_BY_ID + SUCCESS:
