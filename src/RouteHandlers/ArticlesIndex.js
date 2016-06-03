@@ -11,6 +11,7 @@ class ArticlesIndex extends Component {
             <div>
                 <h1>News app: Articles</h1>
                 <Navigation />
+                {this.props.children}
             </div>
         )
     }
