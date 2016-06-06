@@ -1,14 +1,26 @@
-import React, { Component, PropTypes } from 'react';
-import Comment from './Comment';
-import toggleOpen from '../decorators/toggleOpen';
-import NewCommentForm from './NewCommentForm';
+import React, { Component, PropTypes } from 'react'
+import Comment from './Comment'
+import toggleOpen from '../decorators/toggleOpen'
+import NewCommentForm from './NewCommentForm'
+
+import { loadAllСomments } from '../AC/comments'
 
 class CommentList extends Component {
     static propTypes = {
         comments: PropTypes.array
     };
 
+    componentWillReceiveProps(newProps) {
+        const { isOpen, article } = newProps;
+        console.log('componentWillReceiveProps newProps CommentList', newProps);
+    }
+
+    componentDidMount() {
+
+    }
+
     render() {
+        console.log('CommentList', this);
         return (
             <div>
                 {this.getToggler()}
@@ -24,9 +36,12 @@ class CommentList extends Component {
     }
 
     getList() {
-        console.log('getList');
         const { isOpen, article } = this.props
-        const comments = article.getRelation('comments')
+        
+        let comments = article.getRelation('comments')
+        
+        console.log('this.props', this.props);
+        console.log('comments', comments);
         if (!isOpen) return null
         if (!comments || !comments.length) return <h3>No comments yet</h3>
         const items = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)

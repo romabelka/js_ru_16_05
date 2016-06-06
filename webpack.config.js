@@ -13,9 +13,15 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/static/'
     },
-        resolve: {
+    resolve: {
         modulesDirectories: ['node_modules'],
         extensions: ['', '.js', '.json', '.css', '.scss']
+    },
+    devServer: {
+        proxy: [{
+            path: '/api/*',
+            target: 'http://localhost:3001'
+        }]
     },
     module: {
         loaders: [

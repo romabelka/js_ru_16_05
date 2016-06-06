@@ -1,8 +1,10 @@
-import { ADD_COMMENT } from '../constants';
-import AppDispatcher from '../dispatcher';
+import AppDispatcher from '../dispatcher'
+import { LOAD_ALL_COMMENTS, START, SUCCESS, FAIL } from '../constants'
+import { asyncAC } from './utils'
+import { loadAllСommentsCall } from './apiCalls'
 
 export function addComment(articleId, comment) {
-    const id = Math.random() * 100;
+    const id = Math.random() * 100
     AppDispatcher.dispatch({
         type: ADD_COMMENT,
         payload: {
@@ -11,3 +13,6 @@ export function addComment(articleId, comment) {
         }
     })
 }
+
+export const loadAllСomments = asyncAC(LOAD_ALL_COMMENTS, loadAllСommentsCall)
+//loadAllСomments()
