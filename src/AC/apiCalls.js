@@ -8,6 +8,6 @@ export function loadArticleCall({ id }) {
     return $.get(`api/article/${id}`)
 }
 
-export function loadAllCommentsCall() {
-    return $.get(`/api/comment`)
+export function loadCommentsCall( { id }) {
+    return $.get(`/api/comment?article=${id}`)
 }

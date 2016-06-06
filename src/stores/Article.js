@@ -1,13 +1,7 @@
 import BasicStore from './BasicStore'
 import AppDispatcher from '../dispatcher'
-import {
-    DELETE_ARTICLE,
-    ADD_COMMENT,
-    LOAD_ALL_ARTICLES,
-    LOAD_ARTICLE_BY_ID,
-    START,
-    SUCCESS,
-    FAIL } from '../constants'
+import { DELETE_ARTICLE, LOAD_COMMENTS_FOR_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE_BY_ID,
+    START, SUCCESS, FAIL } from '../constants'
 
 export default class Article extends BasicStore {
     constructor(...args) {
@@ -15,7 +9,7 @@ export default class Article extends BasicStore {
 
         this.dispatchToken = AppDispatcher.register((action) => {
             const { type, payload, response, error } = action
-
+            let article
             switch (type) {
                 case DELETE_ARTICLE:
                     this._delete(payload.id)
@@ -23,7 +17,7 @@ export default class Article extends BasicStore {
 
                 case ADD_COMMENT:
                     AppDispatcher.waitFor([this.getStores().comments.dispatchToken])
-                    const article = this.getById(payload.articleId)
+                    article = this.getById(payload.articleId)
                     article.comments = (article.comments  || []).concat(payload.comment.id)
                     break
 
@@ -40,7 +34,9 @@ export default class Article extends BasicStore {
                     break
 
                 case LOAD_ARTICLE_BY_ID + START:
-                    this.getById(payload.id).loading = true
+                    article = this.getById(payload.id)
+                    if (!article) this._add({ id: payload.id, loading: true })
+                    else article.loading = true
                     break;
 
                 case LOAD_ARTICLE_BY_ID + SUCCESS:
@@ -48,6 +44,20 @@ export default class Article extends BasicStore {
                     break
 
                 case LOAD_ARTICLE_BY_ID + FAIL:
+                    break
+
+                case LOAD_COMMENTS_FOR_ARTICLE + START:
+                    Object.assign(this.getById(payload.id), {
+                        loadingComments: true
+                    })
+                    break
+
+                case LOAD_COMMENTS_FOR_ARTICLE + SUCCESS:
+                    AppDispatcher.waitFor([this.getStores().comments.dispatchToken])
+                    Object.assign(this.getById(payload.id), {
+                        loadingComments: false,
+                        loadedComments: true
+                    })
                     break
 
                 default:

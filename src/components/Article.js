@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import Body from './Body'
 import toggleOpen from '../decorators/toggleOpen'
-import { deleteArticle, loadArticleById } from '../AC/articles'
+import { deleteArticle } from '../AC/articles'
 import { commentStore } from '../stores'
 
 class Article extends Component {
@@ -24,19 +24,17 @@ class Article extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        const {isOpen, article: { id, text, loading }} = newProps
-        if (isOpen && !text && !loading ) loadArticleById({ id })
     }
 
     componentDidUpdate() {
     }
 
     render() {
-        const { article, isOpen, toggleOpen, comments } = this.props
+        const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>
 
-        const { title, text, id } = article
-        const textItem = isOpen ? <Body article = {article} comments = { comments } />: null
+        const { title, text, comments, id } = article
+        const textItem = isOpen ? <Body article = {article} />: null
         return (
             <div>
                 <h3 onClick = {toggleOpen} ref="title">
@@ -64,7 +62,7 @@ Article.propTypes = {
 
     //From toggleOpen decorator
     isOpen: PropTypes.bool.isRequired,
-    toggleOpen: PropTypes.func.isRequired
+    toggleOpen: PropTypes.func
 }
 
 export default Article
