@@ -10,7 +10,8 @@ class CommentList extends Component {
     };
 
     static contextTypes = {
-        router: PropTypes.object
+        router: PropTypes.object,
+        user: PropTypes.string
     }
 
     componentWillReceiveProps({ isOpen, article }) {
@@ -21,6 +22,7 @@ class CommentList extends Component {
     render() {
         return (
             <div>
+                <h3>Hello {this.context.user}</h3>
                 {this.getToggler()}
                 {this.getList()}
             </div>
