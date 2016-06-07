@@ -13,7 +13,10 @@ export const history = browserHistory
 export default (
     <Router history = {history}>
         <Redirect from = "/" to = "/articles"/>
-        <Route path = "/articles" component = {ArticleRoot}>
+        <Route path = "/articles" component = {ArticleRoot}
+            onEnter = {(routes, replace) => console.log(' entering articles ', replace)}
+            onLeave = {(...args) => console.log(' leaving articles ', ...args)}
+        >
             <IndexRoute component = {ArticleIndex}/>
             <Route path = "new" component = {ArticleNew} />
             <Route path = ":id" component = {ArticlePage} />

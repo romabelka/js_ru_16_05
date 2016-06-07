@@ -8,7 +8,7 @@ class ArticlesIndex extends Component {
     };
 
     state = {
-        user: 'Roma'
+        user: null
     }
 
     static childContextTypes = {
