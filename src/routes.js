@@ -8,8 +8,10 @@ import CommentsRoot from './RouteHandlers/CommentsRoot'
 import CommentsPage from './RouteHandlers/CommentsPage'
 import NotFound from './RouteHandlers/NotFound'
 
+export const history = browserHistory
+
 export default (
-    <Router history = {browserHistory}>
+    <Router history = {history}>
         <Redirect from = "/" to = "/articles"/>
         <Route path = "/articles" component = {ArticleRoot}>
             <IndexRoute component = {ArticleIndex}/>
