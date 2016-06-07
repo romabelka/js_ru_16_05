@@ -15,7 +15,11 @@ class CommentsPagination extends Component {
 
     getPagination(total) {
         const links = Array(...Array(Math.floor((total - 1)/10) + 1))
-            .map((el, index) => <li key={index}><Link to={`/comments/${index + 1}`}>{index + 1}</Link></li>)
+            .map((el, index) => (
+                <li key={index}>
+                    <Link to={`/comments/${index + 1}`} activeClassName="active" activeStyle={{color:'red'}}>{index + 1}</Link>
+                </li>)
+            )
         return <ul>{links}</ul>
     }
 }
