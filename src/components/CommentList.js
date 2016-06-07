@@ -9,8 +9,13 @@ class CommentList extends Component {
         article: PropTypes.object.isRequired
     };
 
+    static contextTypes = {
+        router: PropTypes.object
+    }
+
     componentWillReceiveProps({ isOpen, article }) {
         if (isOpen && !article.loadedComments && !article.loadingComments) loadComments({ id: article.id })
+        console.log('---', 'context', this.context)
     }
 
     render() {
