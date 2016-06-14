@@ -3,6 +3,7 @@ import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
 import { loadComments } from '../AC/comments'
+import { getRelation } from '../utils'
 
 class CommentList extends Component {
     static propTypes = {
@@ -38,7 +39,7 @@ class CommentList extends Component {
     getList() {
         const { isOpen, article } = this.props
 
-        const comments = article.getRelation('comments')
+        const comments = getRelation(article, 'comments')
         if (!isOpen) return null
         if (!article.loadedComments) return <h3>Loading...</h3>
         if (!comments || !comments.length) return <h3>No comments yet</h3>
