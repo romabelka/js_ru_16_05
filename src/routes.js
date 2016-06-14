@@ -9,18 +9,20 @@ import CommentsRoot from './RouteHandlers/CommentsRoot'
 import CommentsPage from './RouteHandlers/CommentsPage'
 import NotFound from './RouteHandlers/NotFound'
 
+import { userStore } from './stores'
+
 export const history = browserHistory
 
 export default (
     <Router history = {history}>
         <Redirect from = "/" to = "/articles"/>
         <Route path = "/" component = {AppRoot} >
-            <Route path = "/articles" component = {ArticleRoot}
-                onEnter = {(routes, replace) => console.log(' entering articles ', replace)}
-                onLeave = {(...args) => console.log(' leaving articles ', ...args)}
-            >
+            <Route path = "/articles" component = {ArticleRoot}>
                 <IndexRoute component = {ArticleIndex}/>
-                <Route path = "new" component = {ArticleNew} />
+                <Route path = "new" component = {ArticleNew}
+                       onEnter = {(routes, replace) => {if (!userStore.userName) replace('/articles')} }
+                       onLeave = {(...args) => console.log(' leaving articles ', ...args)}
+                />
                 <Route path = ":id" component = {ArticlePage} />
                 <Route path = "/page/:id" component = {ArticlePage} />
             </Route>
