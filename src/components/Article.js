@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom'
 import Body from './Body'
 import toggleOpen from '../decorators/toggleOpen'
 import { deleteArticle } from '../AC/articles'
-import { commentStore } from '../stores'
 
 class Article extends Component {
     constructor() {
@@ -57,7 +56,7 @@ Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string,
-        id: PropTypes.number.isRequired
+        id: PropTypes.string.isRequired
     }),
 
     //From toggleOpen decorator
