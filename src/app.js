@@ -1,5 +1,18 @@
 //import React from 'react'
 import { render } from 'react-dom'
-import routes from './routes'
+import React from 'react'
+import Counter from './containers/Counter'
+import store from './store'
+import { increment } from './AC/counter'
 
-render(routes, document.getElementById('container'))
+function wrappedIncrement(...args) {
+    store.dispatch(increment(...args))
+}
+
+function renderComponent() {
+    render(<Counter count = {store.getState()} increment = {wrappedIncrement}/>, document.getElementById('container'))
+}
+
+renderComponent()
+
+store.subscribe(renderComponent)
