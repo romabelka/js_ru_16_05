@@ -1,6 +1,8 @@
-import { INCREMENT } from '../constants'
+import { combineReducers } from 'redux'
+import articles from './articles'
+import counterReducer from './counter'
 
-export default (count, action) => {
-    const { type, payload } = action
-    return type == INCREMENT ? count + payload.value : count
-}
+export default combineReducers({
+    articles,
+    count: counterReducer
+})

@@ -10,7 +10,7 @@ function wrappedIncrement(...args) {
 }
 
 function renderComponent() {
-    render(<Counter count = {store.getState()} increment = {wrappedIncrement}/>, document.getElementById('container'))
+    render(<Counter count = {store.getState().count} increment = {wrappedIncrement}/>, document.getElementById('container'))
 }
 
 renderComponent()
