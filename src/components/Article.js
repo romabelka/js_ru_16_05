@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import Body from './Body'
 import toggleOpen from '../decorators/toggleOpen'
 import { deleteArticle } from '../AC/articles'
+import { connect } from 'react-redux'
 
 class Article extends Component {
     constructor() {
@@ -47,7 +48,8 @@ class Article extends Component {
 
     handleDelete = (ev) => {
         ev.preventDefault()
-        deleteArticle(this.props.article.id)
+        const { deleteArticle, article } = this.props
+        this.props.deleteArticle(article.id)
     }
 }
 
@@ -64,4 +66,6 @@ Article.propTypes = {
     toggleOpen: PropTypes.func
 }
 
-export default Article
+export default connect(null, {
+    deleteArticle
+})(Article)
