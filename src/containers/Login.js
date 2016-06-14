@@ -1,9 +1,15 @@
 import React, { Component, PropTypes } from 'react'
+import { signIn } from '../AC/user'
 
 class AppContainer extends Component {
     state = {
         name: ''
     }
+
+    static contextTypes = {
+        user: PropTypes.string
+    }
+
     render() {
         return (
         <div>
@@ -20,6 +26,7 @@ class AppContainer extends Component {
 
     handleSubmit = (ev) => {
         ev.preventDefault()
+        signIn(this.state.name)
 
         this.setState({
             name: ''

@@ -1,17 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import Navigation from '../containers/Navigation'
 import Login from '../containers/Login'
-import { Link } from 'react-router'
+import connectToStore from '../decorators/connectToStore'
 
 class AppRoot extends Component {
     static propTypes = {
 
     };
-
-/*
-    state = {
-        user: null
-    }
 
     static childContextTypes = {
         user: PropTypes.string
@@ -19,10 +14,9 @@ class AppRoot extends Component {
 
     getChildContext() {
         return {
-            user: this.state.user
+            user: this.props.user
         }
     }
-*/
 
     render() {
         return (
@@ -34,4 +28,10 @@ class AppRoot extends Component {
     }
 }
 
-export default AppRoot
+function getState(stores) {
+    return {
+        user: stores.user.userName
+    }
+}
+
+export default connectToStore(['user'], getState)(AppRoot)
