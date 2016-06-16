@@ -3,6 +3,7 @@ import AppDispatcher from '../dispatcher'
 import { ADD_COMMENT, LOAD_COMMENTS_FOR_ARTICLE, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL, LOADING } from '../constants'
 import { loadCommentsForPage } from '../AC/comments'
 
+
 export default class Comment extends BasicStore {
     constructor(...args) {
         super(...args)
@@ -44,3 +45,4 @@ export default class Comment extends BasicStore {
         return pagination.map(this.getById)
     }
 }
+

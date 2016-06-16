@@ -63,6 +63,7 @@ export default class Article extends BasicStore {
                 default:
                     return
             }
+
             this.emitChange()
         })
     }

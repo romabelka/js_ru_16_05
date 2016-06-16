@@ -19,12 +19,12 @@ class ArticleList extends Component {
                 </ul>
                 <Chart articles = {articles}/>
             </div>
-        )
+        );
     }
 }
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
 }
 
 export default oneOpen(ArticleList)

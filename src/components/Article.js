@@ -66,3 +66,15 @@ Article.propTypes = {
 }
 
 export default Article
+
+// хорошее документирование, если придется переиспользовать компонент - propTypes
+// 90% переменных в реакт - const
+// лайф макросы
+
+// реакт просто перестраивает дерево, не проверяет данные внутри - change state
+
+// sendMessage(msg) {
+//     msg['id'] = this.comments.length + 1;
+//     //нет, для этого нужно использовать action creator и добавлять в стор реагируя на action - пересмотрите видео урока
+//     this.comments.push(msg);
+// }

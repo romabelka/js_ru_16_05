@@ -5,7 +5,7 @@ export function loadAllArticlesCall() {
 }
 
 export function loadArticleCall({ id }) {
-    return $.get(`/api/article/${id}`)
+    return $.get(`api/article/${id}`)
 }
 
 export function loadCommentsCall( { id }) {

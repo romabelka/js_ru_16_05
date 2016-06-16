@@ -4,6 +4,8 @@ import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
 import { loadComments } from '../AC/comments'
 
+import { loadAllСomments } from '../AC/comments'
+
 class CommentList extends Component {
     static propTypes = {
         article: PropTypes.object.isRequired
@@ -20,6 +22,7 @@ class CommentList extends Component {
     }
 
     render() {
+        console.log('CommentList', this);
         return (
             <div>
                 <h3>Hello {this.context.user}</h3>

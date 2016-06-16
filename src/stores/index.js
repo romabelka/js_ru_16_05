@@ -4,7 +4,8 @@ import User from './User'
 import BasicStore from './BasicStore'
 import { normalizedArticles, normalizedComments } from '../fixtures'
 
-const stores = {}
+
+const stores = {};
 
 Object.assign(stores, {
     articles: new Article(stores),
