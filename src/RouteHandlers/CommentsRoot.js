@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Navigation from '../containers/Navigation'
+import CommentsPagination from '../containers/CommentsPagination'
 
-class ArticlesIndex extends Component {
+class CommentsRoot extends Component {
     static propTypes = {
 
     };
@@ -9,12 +9,11 @@ class ArticlesIndex extends Component {
     render() {
         return (
             <div>
-                <h1>News app: Articles</h1>
-                <Navigation />
+                <CommentsPagination />
                 {this.props.children}
             </div>
         )
     }
 }
 
-export default ArticlesIndex
+export default CommentsRoot
