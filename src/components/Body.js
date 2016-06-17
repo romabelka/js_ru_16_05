@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-//import CommentList from './CommentList'
+import CommentList from './CommentList'
 
 function Body(props) {
     const { article } = props
@@ -11,7 +11,7 @@ function Body(props) {
     return (
         <section>
             {text}
-            <div>{/*<CommentList article = {article} />*/}</div>
+            <div><CommentList article = {article} /></div>
         </section>
     )
 }

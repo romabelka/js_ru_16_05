@@ -2,7 +2,7 @@ import store from './store'
 
 export function getRelation(entity, relation) {
     const entityStore = store.getState()[relation]
-    if (!entity[relation] || entityStore) return []
+    if (!entity[relation] || !entityStore) return []
 
-    entityStore.filter((relEntity) => entity[relation].includes(relEntity.id))
+    return entityStore.filter((relEntity) => entity[relation].includes(relEntity.id))
 }
