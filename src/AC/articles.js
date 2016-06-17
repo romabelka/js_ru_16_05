@@ -14,7 +14,7 @@ export function deleteArticle(id) {
 export function loadAllArticles() {
     return {
         type: LOAD_ALL_ARTICLES,
-        callAPI: '/article'
+        callAPI: '/api/article'
     }
 }*/
 
@@ -24,8 +24,10 @@ export function loadAllArticles() {
             type: LOAD_ALL_ARTICLES + START
         })
 
-        $.get('/article')
-            .done(response => dispatch({ type: LOAD_ALL_ARTICLES + SUCCESS, response}))
-            .fail(error => dispatch({type: LOAD_ALL_ARTICLES + FAIL, error}))
+        setTimeout(() => {
+            $.get('/api/article')
+                .done(response => dispatch({ type: LOAD_ALL_ARTICLES + SUCCESS, response}))
+                .fail(error => dispatch({type: LOAD_ALL_ARTICLES + FAIL, error}))
+        }, 1000)
     }
 }

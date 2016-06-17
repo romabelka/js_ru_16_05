@@ -5,7 +5,7 @@ import logger from '../middlewares/logger'
 import thunk from 'redux-thunk'
 
 const enhancer = compose(
-    applyMiddleware(randomId, logger, thunk),
+    applyMiddleware(randomId, thunk, logger),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )
 

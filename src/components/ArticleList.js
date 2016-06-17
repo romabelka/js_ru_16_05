@@ -5,18 +5,22 @@ import oneOpen from '../decorators/oneOpen'
 
 class ArticleList extends Component {
     render() {
-        const { articles, openItem, isOpen } = this.props
+        const { articles, loading, openItem, isOpen } = this.props
         const articleItems = articles.map((article) => <li key={article.id}>
             <Article article = {article}
                 isOpen = {isOpen(article.id)}
                 toggleOpen = {openItem(article.id)}
             />
         </li>)
+
+        const loader = loading ? <h3>Loading...</h3> : null
+
         return (
             <div>
                 <ul>
                     {articleItems}
                 </ul>
+                {loader}
                 <Chart articles = {articles}/>
             </div>
         )

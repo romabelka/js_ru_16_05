@@ -1,16 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import ArticleList from '../components/ArticleList'
+import { loadAllArticles } from '../AC/articles'
+import { toArray } from '../utils'
 
 class ArticlesContainer extends Component {
     static propTypes = {
         articles: PropTypes.array
     };
 
+    componentDidMount() {
+        this.props.loadAllArticles()
+    }
+
     render() {
         return (
             <div>
-                <ArticleList articles = {this.props.articles} />
+                <ArticleList articles = {this.props.articles} loading = {this.props.loading}/>
             </div>
         )
     }
@@ -18,6 +24,7 @@ class ArticlesContainer extends Component {
 
 export default connect((state) => {
     return {
-        articles: state.articles
+        articles: toArray(state.articles.entities),
+        loading: state.articles.loading
     }
-})(ArticlesContainer)
+}, { loadAllArticles })(ArticlesContainer)
