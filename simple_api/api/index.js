@@ -3,7 +3,7 @@ var mocks = require('./mock');
 var assign = require('object-assign');
 
 router.get('/article', function (req, res, next) {
-    var articles = withComments(mocks.articles).map(function (article) {
+    var articles = mocks.articles.map(function (article) {
             return assign({}, article, {
                 text: undefined
             })
@@ -15,7 +15,7 @@ router.get('/article', function (req, res, next) {
 });
 
 router.get('/article/:id', function (req, res, next) {
-    var article = withComments(mocks.articles).filter(function (article) {
+    var article = mocks.articles.filter(function (article) {
         return article.id == req.params.id
     })[0];
     if (article) return res.json(article);
@@ -27,9 +27,9 @@ router.post('/article', function (req, res, next) {
     var body = req.body;
     var article = {
         text: body.text,
-        id: mocks.articles.length + 1,
+        id: Date.now().toString(),
         user: body.user,
-        timeStamp: new Date()
+        date: new Date()
     };
     mocks.articles.push(article);
     res.json(article)
@@ -37,9 +37,16 @@ router.post('/article', function (req, res, next) {
 
 router.get('/comment', function (req, res, next) {
     var aid = req.query.article;
-    if (aid) return res.json(mocks.comments.filter(function (comment) {
-        return comment.article == aid
-    }))
+    if (aid) {
+        var article = mocks.articles.find(function(article) {
+            return article.id == aid
+        })
+        return res.json((article.comments || []).map(function(id) {
+            return mocks.comments.find(function(comment) {
+                return comment.id == id
+            })
+        }))
+    }
 
     var limit = Number(req.query.limit) || mocks.comments.length,
         offset = Number(req.query.offset) || 0;
@@ -51,9 +58,9 @@ router.get('/comment', function (req, res, next) {
 
 router.post('/comment', function (req, res, next) {
     var comment = {
-        id : mocks.comments.length + 1,
+        id : Date.now().toString(),
         text : req.body.text,
-        timeStamp: new Date(),
+        date: new Date(),
         user: req.body.user,
         article : req.body.article
     };
@@ -66,14 +73,3 @@ router.post('/report', function (req, res) {
 })
 
 module.exports = router;
-
-function withComments(articles) {
-    return articles.map(function (q) {
-        q.comments = mocks.comments.filter(function (comment) {
-            return comment.article == q.id
-        }).map(function (comment) {
-            return comment.id
-        });
-        return q
-    })
-}
