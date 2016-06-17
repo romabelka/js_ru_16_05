@@ -24,7 +24,7 @@ class ArticlesContainer extends Component {
 
 export default connect((state) => {
     return {
-        articles: toArray(state.articles.entities),
-        loading: state.articles.loading
+        articles: toArray(state.articles.get('entities').toJS()),
+        loading: state.articles.get('loading')
     }
 }, { loadAllArticles })(ArticlesContainer)

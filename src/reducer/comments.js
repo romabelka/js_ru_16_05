@@ -8,7 +8,6 @@ const defaultState = {
     loading: false
 }
 
-
 export default (comments = defaultState, action) => {
     const { type, payload, randomId, response, error } = action
 
