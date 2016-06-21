@@ -12,7 +12,7 @@ export default (comments = defaultState, action) => {
     const { type, payload, randomId, response, error } = action
 
     switch (type) {
-        //case ADD_COMMENT: return comments.concat({...payload.comment, id: randomId})
+        case ADD_COMMENT: return comments.setIn(['entities', randomId.toString()], fromJS({...payload.comment, id: randomId}))
     }
 
     return comments

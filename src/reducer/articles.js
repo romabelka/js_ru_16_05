@@ -1,7 +1,7 @@
 import { normalizedArticles } from '../fixtures'
 import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, SUCCESS, START } from '../constants'
 import { fromArray } from '../utils'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 
 const defaultState = fromJS({
     entities: {},
@@ -21,13 +21,10 @@ export default (state = defaultState, action) => {
                 .update('entities', entities => entities.merge(fromJS(fromArray(response))))
 //            return {...state, loading: false, entities: {...state.entities, ...fromArray(response)}}
 
-/*
-        case DELETE_ARTICLE: return articles.filter(article => article.id != payload.id)
+        case DELETE_ARTICLE: return state.deleteIn(['entities', payload.id])
 
-        case ADD_COMMENT: return articles.map(article => payload.articleId != article.id ? article :
-            {...article, comments: (article.comments || []).concat(randomId)}
-        )
-*/
+        case ADD_COMMENT: return state.updateIn(['entities', payload.articleId, 'comments'],
+            new List([]), comments => comments.push(randomId))
     }
 
     return state
