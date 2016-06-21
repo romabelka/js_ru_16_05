@@ -2,9 +2,9 @@ import store from './store'
 
 export function getRelation(entity, relation) {
     const relStore = store.getState()[relation]
-    if (!entity[relation] || !relStore) return []
+    if (!entity.get(relation) || !relStore) return []
 
-    return entity[relation].map(id => relStore.entities[id])
+    return entity.get(relation).map(id => relStore.getIn(['entities', id.toString()]))
 }
 
 export function toArray(object) {

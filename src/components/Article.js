@@ -32,8 +32,8 @@ class Article extends Component {
     render() {
         const { article, isOpen, toggleOpen } = this.props
         if (!article) return <h3>No article</h3>
+        const title = article.get('title')
 
-        const { title, text, comments, id } = article
         const textItem = isOpen ? <Body article = {article} />: null
         return (
             <div>
@@ -49,17 +49,13 @@ class Article extends Component {
     handleDelete = (ev) => {
         ev.preventDefault()
         const { deleteArticle, article } = this.props
-        this.props.deleteArticle(article.id)
+        deleteArticle(article.get('id'))
     }
 }
 
 
 Article.propTypes = {
-    article: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        text: PropTypes.string,
-        id: PropTypes.string.isRequired
-    }),
+    article: PropTypes.object,
 
     //From toggleOpen decorator
     isOpen: PropTypes.bool.isRequired,

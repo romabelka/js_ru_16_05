@@ -6,7 +6,7 @@ import { toArray } from '../utils'
 
 class ArticlesContainer extends Component {
     static propTypes = {
-        articles: PropTypes.array
+        articles: PropTypes.object
     };
 
     componentDidMount() {
@@ -24,7 +24,7 @@ class ArticlesContainer extends Component {
 
 export default connect((state) => {
     return {
-        articles: toArray(state.articles.get('entities').toJS()),
+        articles: state.articles.get('entities').valueSeq(),
         loading: state.articles.get('loading')
     }
 }, { loadAllArticles })(ArticlesContainer)

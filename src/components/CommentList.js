@@ -45,11 +45,11 @@ class CommentList extends Component {
 /*
         if (!article.loadedComments) return <h3>Loading...</h3>
 */
-        if (!comments || !comments.length) return <h3>No comments yet</h3>
-        const items = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
+        if (!comments || !comments.size) return <h3>No comments yet</h3>
+        const items = comments.map(comment => <li key = {comment.get('id')}><Comment comment = {comment} /></li>)
         return <ul>
             {items}
-            <li><NewCommentForm articleId = {article.id} /></li>
+            <li><NewCommentForm articleId = {article.get('id')} /></li>
         </ul>
     }
 }

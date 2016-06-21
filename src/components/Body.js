@@ -5,12 +5,11 @@ function Body(props) {
     const { article } = props
     if (!article) return null
 
-    const { text, loading } = article
-    if (loading) return <h3>Loading...</h3>
+    if (article.get('loading')) return <h3>Loading...</h3>
 
     return (
         <section>
-            {text}
+            {article.get('text')}
             <div><CommentList article = {article} /></div>
         </section>
     )

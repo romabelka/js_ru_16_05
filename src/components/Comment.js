@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 
 function Comment(props) {
-    const {comment: { text, user }} = props
+    const { comment } = props
     return (
-        <div>{text} <b>by {user}</b></div>
+        <div>{comment.get('text')} <b>by {comment.get('user')}</b></div>
     )
 }
 

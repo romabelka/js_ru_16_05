@@ -6,10 +6,10 @@ import oneOpen from '../decorators/oneOpen'
 class ArticleList extends Component {
     render() {
         const { articles, loading, openItem, isOpen } = this.props
-        const articleItems = articles.map((article) => <li key={article.id}>
+        const articleItems = articles.map((article) => <li key={article.get('id')}>
             <Article article = {article}
-                isOpen = {isOpen(article.id)}
-                toggleOpen = {openItem(article.id)}
+                isOpen = {isOpen(article.get('id'))}
+                toggleOpen = {openItem(article.get('id'))}
             />
         </li>)
 
@@ -28,7 +28,7 @@ class ArticleList extends Component {
 }
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.object.isRequired
 }
 
 export default oneOpen(ArticleList)
