@@ -8,7 +8,6 @@ export function deleteArticle(id) {
     }
 }
 
-/*
 //For Hometask
 
 export function loadAllArticles() {
@@ -16,8 +15,9 @@ export function loadAllArticles() {
         type: LOAD_ALL_ARTICLES,
         callAPI: '/api/article'
     }
-}*/
+}
 
+/*
 export function loadAllArticles() {
     return (dispatch, getState) => {
         dispatch({
@@ -30,4 +30,4 @@ export function loadAllArticles() {
                 .fail(error => dispatch({type: LOAD_ALL_ARTICLES + FAIL, error}))
         }, 1000)
     }
-}
+}*/
