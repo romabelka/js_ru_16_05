@@ -2,6 +2,8 @@ import React, { PropTypes, Component } from 'react'
 import Article from './Article'
 import Chart from './Chart'
 import oneOpen from '../decorators/oneOpen'
+import CSSTransition from 'react-addons-css-transition-group'
+import './animation.css'
 
 class ArticleList extends Component {
     render() {
@@ -17,9 +19,9 @@ class ArticleList extends Component {
 
         return (
             <div>
-                <ul>
+                <CSSTransition component = "ul" transitionName = "articles" transitionEnterTimeout = {500} transitionLeaveTimeout = {300}>
                     {articleItems}
-                </ul>
+                </CSSTransition>
                 {loader}
                 <Chart articles = {articles}/>
             </div>
