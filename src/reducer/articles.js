@@ -1,10 +1,10 @@
 import { normalizedArticles } from '../fixtures'
 import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_COMMENTS_FOR_ARTICLE, SUCCESS, START } from '../constants'
 import { fromArray } from '../utils'
-import { fromJS, List } from 'immutable'
+import { fromJS, List, OrderedMap, Map } from 'immutable'
 
-const defaultState = fromJS({
-    entities: {},
+const defaultState = Map({
+    entities: OrderedMap({}),
     loading: false
 })
 

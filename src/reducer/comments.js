@@ -1,10 +1,10 @@
 import { ADD_COMMENT, LOAD_COMMENTS_FOR_ARTICLE, SUCCESS, START, FAIL } from '../constants'
 import { normalizedComments} from '../fixtures'
 import { fromArray } from '../utils'
-import { fromJS } from 'immutable'
+import { fromJS, Map, OrderedMap } from 'immutable'
 
-const defaultState = fromJS({
-    entities: {},
+const defaultState = Map({
+    entities: OrderedMap({}),
     loading: false
 })
 
