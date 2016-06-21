@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { loadCommentsForArticle } from '../AC/comments'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
@@ -14,12 +16,10 @@ class CommentList extends Component {
         user: PropTypes.string
     }
 
-/*
-    componentWillReceiveProps({ isOpen, article }) {
-        if (isOpen && !article.loadedComments && !article.loadingComments) loadComments({ id: article.id })
-        console.log('---', 'context', this.context)
+    componentWillReceiveProps({ isOpen, article, loadCommentsForArticle }) {
+        if (!isOpen || article.get('loadedComments') || article.get('loadingComments')) return
+        loadCommentsForArticle(article.get('id'))
     }
-*/
 
     render() {
         return (
@@ -42,9 +42,9 @@ class CommentList extends Component {
 
         const comments = getRelation(article, 'comments')
         if (!isOpen) return null
-/*
-        if (!article.loadedComments) return <h3>Loading...</h3>
-*/
+
+        if (!article.get('loadedComments')) return <h3>Loading...</h3>
+
         if (!comments || !comments.size) return <h3>No comments yet</h3>
 
         const items = comments.map(comment => <li key = {comment.get('id')}><Comment comment = {comment} /></li>)
@@ -55,4 +55,4 @@ class CommentList extends Component {
     }
 }
 
-export default toggleOpen(CommentList)
+export default connect(null, { loadCommentsForArticle })(toggleOpen(CommentList))
